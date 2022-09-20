@@ -1,11 +1,19 @@
-# Welcome to README.md file!
+# Welcome!
 
 ## Description files and directories
 
-> - **data** - the directory with the data for classification and detection. The detection dataset has YOLOv5 format and
-> contains three classes [tigers, leopards, empty]. The class empty is about 10% from all volume dataset. The
-> classification dataset contains two classes [tigers, leopards]. You can download all data using this repo (https://doi.org/10.6084/m9.figshare.21162829.v3) \
-> - **weights** - the directory with weights for classification and detection tasks. The weights for classification
+<details open>
+<summary>To reproduce article results you need to use this data:</summary>
+
+- [Detection and classification datasets](https://doi.org/10.6084/m9.figshare.21162829.v3)  🚀 RECOMMENDED
+- [Model weights for detection and classification](https://doi.org/10.6084/m9.figshare.21162829.v3)  ☘️
+
+</details>
+
+- **data** - the directory with the data for classification and detection. The detection dataset has YOLOv5 format and
+contains three classes [tigers, leopards, empty]. The class empty is about 10% from all volume dataset. The
+classification dataset contains two classes [tigers, leopards]. You can download all data using this repo (https://doi.org/10.6084/m9.figshare.21162829.v3) \
+**weights** - the directory with weights for classification and detection tasks. The weights for classification
 > pretrained on big dataset that we didn't publish (29 classes for classification). (not visible) \
 > - **utils** - the directory with additional .py files for **train_cls.py** file \
 > - **results_test** - the directory with confusion matrix on the test data
@@ -33,31 +41,36 @@
 > that is located in *configs/config.yaml*. In this case, the weights that are trained on 29 classes will be used.
 
 ```bash
-python train_cls.py -c configs/config.yaml
+$ python train_cls.py -c configs/config.yaml
 ```
 
 > You can change some parameters like number of epochs, batch_size, input_size ant etc. The path to training and
 > validation data is specified by default. If you want to use another dataset you should change *train_dir*, *val_dir*
 > params.
->> `$ python train_cls.py -c configs/config.yaml --epochs 10 --batch_size 32 --input_size 256 --loss smooth --train_dir path/to/your/train/data --val_dir path/to/your/val/data`
+```bash
+$ python train_cls.py -c configs/config.yaml --epochs 10 --batch_size 32 --input_size 256 --loss smooth --train_dir path/to/your/train/data --val_dir path/to/your/val/data
+```
 >
 
-> When training is completed, its results are saved in the **results** directory. Read above about the structure of
-> the **results** directory.
+When training is completed, its results are saved in the **results** directory. Read above about the structure of
+the **results** directory.
 
 <br/>
 
 ## How to use *test_cls.py*
 
-> If you want to evaluate the performance of a neural network on test data, you need to specify the path to the
-> directory with the weights and test data
->> `$ python test_cls.py --pt_w weights/Classification/tigers_vs_leopards/resnest101e --pt_data data/Classificationtigers_vs_leopards/test`
+If you want to evaluate the performance of a neural network on test data, you need to specify the path to the
+directory with the weights and test data
+```bash
+$ python test_cls.py --pt_w weights/Classification/tigers_vs_leopards/resnest101e --pt_data data/Classificationtigers_vs_leopards/test
+```
 
-> > or you can use your trained weights:
+or you can use your trained weights:
 
-> > `$ python test_cls.py --pt_w path/to/your/results --pt_data data/Classification/tigers_vs_leopards/test`
-
-> After testing the results will be saved in **results_test**
+```bash
+$ python test_cls.py --pt_w path/to/your/results --pt_data data/Classification/tigers_vs_leopards/test
+```
+After testing the results will be saved in **results_test**
 
 <br/>
 
