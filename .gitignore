@@ -1,0 +1,9 @@
+data/Classification
+data/Detection
+weights/Classification
+weights/Detection
+results/
+results_test/
+.idea/
+**/*.ipynb_checkpoints
+**/*__pycache__/

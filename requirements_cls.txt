@@ -1,0 +1,20 @@
+torch
+torchvision
+torchaudio
+--extra-index-url https://download.pytorch.org/whl/cu116
+
+timm==0.4.12
+opencv-python
+matplotlib
+seaborn
+
+pandas
+plotly
+ConfigArgParse
+kaleido
+loguru
+multiprocess
+Pillow
+tqdm
+scikit-image
+Shapely
