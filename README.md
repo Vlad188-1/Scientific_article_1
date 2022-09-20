@@ -2,17 +2,17 @@
 
 ## Description files and directories
 
-> **data** - the directory with the data for classification and detection. The detection data has YOLOv5 format and
+> - **data** - the directory with the data for classification and detection. The detection dataset has YOLOv5 format and
 > contains three classes [tigers, leopards, empty]. The class empty is about 10% from all volume dataset. The
-> classification data contains two classes [tigers, leopards]. You can download all data using this repo (https://doi.org/10.6084/m9.figshare.21162829.v3)
-> **weights** - the directory with weights for classification and detection tasks. The weights for classification
+> classification dataset contains two classes [tigers, leopards]. You can download all data using this repo (https://doi.org/10.6084/m9.figshare.21162829.v3) \
+> - **weights** - the directory with weights for classification and detection tasks. The weights for classification
 > pretrained on big dataset that we didn't publish (29 classes for classification). (not visible) \
-> **utils** - the directory with additional .py files for **train_cls.py** file \
-> **results_test** - the directory with confusion matrix on the test data
+> - **utils** - the directory with additional .py files for **train_cls.py** file \
+> - **results_test** - the directory with confusion matrix on the test data
 
 <br/>
 
-> **results** - the directory with results of training
+> - **results** - the directory with results of training
 >> **config.yaml** - the configuration file with training params \
 > > **mapping.yaml** - the file with classes on which the classifier was trained \
 > > **.pt** - the weights of neural network \
@@ -32,7 +32,9 @@
 > If you want to reproduce the results on "tigers_vs_leopards" dataset you need to specify path to *config.yaml* file
 > that is located in *configs/config.yaml*. In this case, the weights that are trained on 29 classes will be used.
 
-> > `$ python train_cls.py -c configs/config.yaml`
+```bash
+python train_cls.py -c configs/config.yaml
+```
 
 > You can change some parameters like number of epochs, batch_size, input_size ant etc. The path to training and
 > validation data is specified by default. If you want to use another dataset you should change *train_dir*, *val_dir*
