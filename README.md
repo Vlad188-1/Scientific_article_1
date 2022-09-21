@@ -35,12 +35,12 @@ $ python train_cls.py -c configs/config.yaml --epochs 10 --batch_size 32 --input
 ```
 
 >When the network training is completed, directory **results_train** will be created, which will contain the following files:
-- **config.yaml** - the configuration file with training params \
-- **mapping.yaml** - the file with classes on which the classifier was trained \
-- **.pt** - the weights of neural network \
-- **results_.json** - the results of training with losses and accuracy \
-- **learning_curve.png** - the curves of training and validation \
-- **events.out.tfevents...** - the results for tensorboard \
+- **config.yaml** - the configuration file with training params
+- **mapping.yaml** - the file with classes on which the classifier was trained
+- **.pt** - the weights of neural network
+- **results_.json** - the results of training with losses and accuracy
+- **learning_curve.png** - the curves of training and validation
+- **events.out.tfevents...** - the results for tensorboard
 
 
 ## How to use *test_cls.py*
