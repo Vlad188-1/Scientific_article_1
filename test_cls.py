@@ -194,8 +194,10 @@ def plot_cm(GT_table: pd.DataFrame, Pred_table: pd.DataFrame):
 
     time_path = datetime.now().strftime('%b-%d-%Y_%H:%M')
     # print(time_path)
-    path_for_save = os.path.join("results_test", time_path)
 
+    path_for_save = os.path.join("results_test", time_path)
+    if not Path("results_test").exists():
+        Path("results_test").mkdir()
     Path(path_for_save).mkdir()
     figure.savefig(os.path.join(path_for_save, "cm.jpg"))
 

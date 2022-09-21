@@ -31,7 +31,7 @@ $ python train_cls.py -c configs/config.yaml
 validation data is specified by default. If you want to use another dataset you should change *train_dir*, *val_dir*
 params.
 ```bash
-$ python train_cls.py -c configs/config.yaml --epochs 10 --batch_size 32 --input_size 256 --loss smooth --train_dir path/to/your/train/data --val_dir path/to/your/val/data
+$ python train_cls.py -c configs/config.yaml --epochs 10 --own_weights paht/to/your/weights --batch_size 32 --input_size 256 --loss smooth --train_dir path/to/your/train/data --val_dir path/to/your/val/data
 ```
 
 >When the network training is completed, directory **results_train** will be created, which will contain the following files:
@@ -56,7 +56,7 @@ or you can use your trained weights:
 ```bash
 $ python test_cls.py --pt_w path/to/your/weights --pt_data data/Classification/tigers_vs_leopards/test
 ```
-After testing, directory results_test will be created where the confusion matrix will be stored.
+After testing, directory **results_test** will be created where the confusion matrix will be stored.
 
 
 ## How to reproduce detection results
