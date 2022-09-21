@@ -15,16 +15,21 @@
 
 ## How to use *train_cls.py*.
 
-> If you want to reproduce the results on "tigers_vs_leopards" dataset you need to specify path to *config.yaml* file
-> that is located in *configs/config.yaml*. In this case, the weights that are trained on 29 classes will be used.
+Install all required libraries
+```bash
+$ pip install -r requrements_cls.txt
+```
+
+If you want to reproduce the results on "tigers_vs_leopards" dataset you need to specify path to *config.yaml* file 
+that is located in *configs/config.yaml*. In this case, the weights that are trained on 29 classes will be used.
 
 ```bash
 $ python train_cls.py -c configs/config.yaml
 ```
 
-> You can change some parameters like number of epochs, batch_size, input_size ant etc. The path to training and
-> validation data is specified by default. If you want to use another dataset you should change *train_dir*, *val_dir*
-> params.
+You can change some parameters like number of epochs, batch_size, input_size ant etc. The path to training and
+validation data is specified by default. If you want to use another dataset you should change *train_dir*, *val_dir*
+params.
 ```bash
 $ python train_cls.py -c configs/config.yaml --epochs 10 --batch_size 32 --input_size 256 --loss smooth --train_dir path/to/your/train/data --val_dir path/to/your/val/data
 ```
