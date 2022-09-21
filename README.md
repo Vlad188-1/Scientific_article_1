@@ -20,8 +20,8 @@
 $ pip install -r requrements_cls.txt
 ```
 
->If you want to reproduce the results on "tigers_vs_leopards" dataset you need to specify path to *config.yaml* file 
-that is located in *configs/config.yaml*. In this case, the weights that are trained on 29 classes will be used.
+>If you want to reproduce the results on **"tigers_vs_leopards"** dataset you need to specify path to *config.yaml* file 
+that is located in *configs/config.yaml*. In this case, the weights that are trained on **29** classes will be used.
 
 ```bash
 $ python train_cls.py -c configs/config.yaml
@@ -54,7 +54,7 @@ $ python test_cls.py --pt_w weights/Classification/tigers_vs_leopards/resnest101
 or you can use your trained weights:
 
 ```bash
-$ python test_cls.py --pt_w path/to/your/results --pt_data data/Classification/tigers_vs_leopards/test
+$ python test_cls.py --pt_w path/to/your/weights --pt_data data/Classification/tigers_vs_leopards/test
 ```
 After testing, directory results_test will be created where the confusion matrix will be stored.
 
