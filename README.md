@@ -73,6 +73,8 @@ $ git clone https://github.com/ultralytics/yolov5.git
 $ pip install -r requirements.txt
 ```
 
+3. Download dataset and change path to train and val dataset in ```animals.yaml file```
+
 3. After that, you need to train YOLOv5 using our pretrained weights
 
 ```bash
