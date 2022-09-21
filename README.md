@@ -1,6 +1,6 @@
 # Welcome!
 
-## Description files and directories
+## Description files and directories 📓
 
 <details open>
 <summary>To reproduce article results you need to use this data:</summary>
@@ -73,7 +73,7 @@ $ git clone https://github.com/ultralytics/yolov5.git
 $ pip install -r requirements.txt
 ```
 
-3. After that, you need to train YOLOV5 using our pretrained weights
+3. After that, you need to train YOLOv5 using our pretrained weights
 
 ```bash
 $ python train.py --imgsz 1280 --epochs 10 --data data/Detection/tigers_vs_leopards/animals.yaml --weights weights/Detection/YOLOv5_L6/weights/best.pt --single-cls --batch 2
