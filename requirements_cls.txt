@@ -18,3 +18,5 @@ Pillow
 tqdm
 scikit-image
 Shapely
+mlxtend
+scikit-learn

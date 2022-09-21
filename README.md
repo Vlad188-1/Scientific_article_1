@@ -5,35 +5,13 @@
 <details open>
 <summary>To reproduce article results you need to use this data:</summary>
 
-- [Detection and classification datasets](https://doi.org/10.6084/m9.figshare.21162829.v3)  🚀 RECOMMENDED
-- [Model weights for detection and classification](https://doi.org/10.6084/m9.figshare.21162829.v3)  ☘️
+- [Detection and classification datasets](https://doi.org/10.6084/m9.figshare.21162829.v3) 
+- [Model weights for detection and classification](https://doi.org/10.6084/m9.figshare.20982226.v2) 🚀 RECOMMENDED
 
 </details>
 
-- **data** - the directory with the data for classification and detection. The detection dataset has YOLOv5 format and
-contains three classes [tigers, leopards, empty]. The class empty is about 10% from all volume dataset. The
-classification dataset contains two classes [tigers, leopards]. You can download all data using this repo (https://doi.org/10.6084/m9.figshare.21162829.v3) \
-**weights** - the directory with weights for classification and detection tasks. The weights for classification
-> pretrained on big dataset that we didn't publish (29 classes for classification). (not visible) \
-> - **utils** - the directory with additional .py files for **train_cls.py** file \
-> - **results_test** - the directory with confusion matrix on the test data
-
-<br/>
-
-> - **results** - the directory with results of training
->> **config.yaml** - the configuration file with training params \
-> > **mapping.yaml** - the file with classes on which the classifier was trained \
-> > **.pt** - the weights of neural network \
-> > **results_.json** - the results of training with losses and accuracy \
-> > **learning_curve.png** - the curves of training and validation \
-> > **events.out.tfevents...** - the results for tensorboard \
->
-<br/>
-
 > **test_cls.py** - the file for testing classifier \
 > **train_cls.py** - the file for training neural network
-
-<br/>
 
 ## How to use *train_cls.py*.
 
@@ -50,12 +28,18 @@ $ python train_cls.py -c configs/config.yaml
 ```bash
 $ python train_cls.py -c configs/config.yaml --epochs 10 --batch_size 32 --input_size 256 --loss smooth --train_dir path/to/your/train/data --val_dir path/to/your/val/data
 ```
->
 
-When training is completed, its results are saved in the **results** directory. Read above about the structure of
-the **results** directory.
-
+When training is completed, its results are saved in the **results_train** directory. The structure of directory is shown below.
 <br/>
+
+**results** - the directory with results of training
+- **config.yaml** - the configuration file with training params \
+- **mapping.yaml** - the file with classes on which the classifier was trained \
+- **.pt** - the weights of neural network \
+- **results_.json** - the results of training with losses and accuracy \
+- **learning_curve.png** - the curves of training and validation \
+- **events.out.tfevents...** - the results for tensorboard \
+
 
 ## How to use *test_cls.py*
 
@@ -70,24 +54,31 @@ or you can use your trained weights:
 ```bash
 $ python test_cls.py --pt_w path/to/your/results --pt_data data/Classification/tigers_vs_leopards/test
 ```
-After testing the results will be saved in **results_test**
+After testing, directory results_test will be created where the confusion matrix will be stored.
 
-<br/>
 
 ## How to reproduce detection results
 
 1. You need to clone git repository with YOLOv5
 
-> > `$ git clone https://github.com/ultralytics/yolov5.git`
+```bash
+$ git clone https://github.com/ultralytics/yolov5.git
+```
 
 2. Then you need to install all libraries using *requirements.txt* for yolov5
 
-> > `$ pip install -r requirements.txt`
+```bash
+$ pip install -r requirements.txt
+```
 
 3. After that, you need to train YOLOV5 using our pretrained weights
 
-> > `$ python train.py --imgsz 1280 --epochs 10 --data data/Detection/tigers_vs_leopards/animals.yaml --weights weights/Detection/YOLOv5_L6/weights/best.pt --single-cls --batch 2`
+```bash
+$ python train.py --imgsz 1280 --epochs 10 --data data/Detection/tigers_vs_leopards/animals.yaml --weights weights/Detection/YOLOv5_L6/weights/best.pt --single-cls --batch 2
+```
 
 4. To evaluate trained network on the test dataset you need to use val.py file in YOLOv5 repository
 
-> > `$ python val.py --test --imgsz 1280 --data data/Detection/tigers_vs_leopards/animals.yaml --weights weights/Detection/YOLOv5_L6/weights/best.pt --single-cls --batch 24 --single-cls`
+```bash
+$ python val.py --test --imgsz 1280 --data data/Detection/tigers_vs_leopards/animals.yaml --weights weights/Detection/YOLOv5_L6/weights/best.pt --single-cls --batch 24 --single-cls
+```

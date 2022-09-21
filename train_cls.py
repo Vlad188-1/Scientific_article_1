@@ -27,8 +27,6 @@ from utils.folder import ImageFolder
 import timm
 from timm.loss.cross_entropy import LabelSmoothingCrossEntropy
 
-from datetime import datetime
-
 torch.manual_seed(1234)
 np.random.seed(1234)
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -66,7 +64,7 @@ def set_config():
     parser.add_argument('--schedule_step', default=3, type=int, help='Change lr every step epochs in gamma times')
     parser.add_argument('--schedule_gamma', default=0.5, type=float, help='new_lr = gamma * old_lr')
     parser.add_argument('--num_workers', type=int, default=0, help='Number of workers')
-    #parser.add_argument('--data_file', type=str, default=None, help='File with selected classes')
+    # parser.add_argument('--data_file', type=str, default=None, help='File with selected classes')
 
     args = parser.parse_args()
 
@@ -126,7 +124,6 @@ def validation(model, dataloader, criterion, epoch) -> Tuple[float, float]:
 
 def train(model, dataloaders, optimizer, criterion, num_epochs, start_epoch=0,
           model_ema: ModelEmaV2 = None, scheduler=None, is_inception=False):
-    
     # Creates a GradScaler once at the beginning of training.
     scaler = GradScaler()
 
@@ -139,7 +136,7 @@ def train(model, dataloaders, optimizer, criterion, num_epochs, start_epoch=0,
     start = time.time()
 
     for epoch in range(start_epoch, num_epochs):
-        
+
         # Each epoch has a training and validation phase
         # =========== Train ============
         print(f'\nTrain epoch {epoch + 1}/{num_epochs}')
@@ -195,7 +192,6 @@ def train(model, dataloaders, optimizer, criterion, num_epochs, start_epoch=0,
             sum_loss += loss.item()
             count_acc += 1
 
-
             print(f'{i}/{len(image_datasets["train"]) // args.batch_size} ', end='')
             print(f'| Loss = {(sum_loss / count_acc):.8f} | Accuracy = {(sum_acc / count_acc):.8f}', end='\r')
 
@@ -210,7 +206,7 @@ def train(model, dataloaders, optimizer, criterion, num_epochs, start_epoch=0,
         all_train_accuracy.append(sum_acc / count_acc)
 
         del (sum_acc, count_acc, sum_loss)
-        print ()
+        print()
 
         # ============ Validataion ==============
         epoch_loss, epoch_acc = validation(model_ema.module if model_ema else model,
@@ -422,7 +418,6 @@ def main():
         if param.requires_grad:
             print("\t", name)
 
-
     params_to_update = list(params_to_update)
     optimizer_ft = torch.optim.SGD(  # params_to_update, lr=0.0001, momentum=0.9)
         [{'params': params_to_update[:-2]},
@@ -451,12 +446,15 @@ def main():
     if args.PretrainedImageNet == False:
         torch.save(cpu_model, os.path.join(writer.log_dir, start_name + suffix + '.pt'))
     else:
-        #torch.jit.save(traced_cpu, os.path.join(writer.log_dir, args.arch + suffix + '.pt'))  # "Inception_v4_ema.pt"
+        # torch.jit.save(traced_cpu, os.path.join(writer.log_dir, args.arch + suffix + '.pt'))  # "Inception_v4_ema.pt"
         torch.save(cpu_model, os.path.join(writer.log_dir, args.arch + suffix + '.pt'))
+
 
 if __name__ == "__main__":
     args = set_config()
-    writer = SummaryWriter(os.path.join("results", datetime.now().strftime('%b-%d-%Y_%H:%M')))
+    if not Path("results_train").exists():
+        Path("results_train").mkdir()
+    writer = SummaryWriter(os.path.join("results_train", datetime.now().strftime('%b-%d-%Y_%H:%M')))
 
     data_transforms = {
         'train': transforms.Compose([
@@ -480,12 +478,12 @@ if __name__ == "__main__":
     # Create training and validation datasets
     image_datasets = {}
     image_datasets['train'] = ImageFolder(args.train_dir, data_transforms['train'])
-                                          # limits_classes=limits_classes,
-                                          # valid_classes=valid_classes)
+    # limits_classes=limits_classes,
+    # valid_classes=valid_classes)
     print('Training Datasets', image_datasets['train'])
     image_datasets['val'] = ImageFolder(args.val_dir, data_transforms['val'],
                                         external_id=image_datasets['train'].class_to_idx)
-                                        # valid_classes=valid_classes)
+    # valid_classes=valid_classes)
 
     yaml.dump(vars(args), open(writer.log_dir + "/config.yaml", "w"), default_flow_style=False)
     yaml.dump(image_datasets['train'].class_to_idx, open(writer.log_dir + "/mapping.yaml", "w"),

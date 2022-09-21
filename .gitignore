@@ -2,8 +2,9 @@ data/Classification
 data/Detection
 weights/Classification
 weights/Detection
-results/
+results_train/
 results_test/
 .idea/
 **/*.ipynb_checkpoints
 **/*__pycache__/
+**/*.DS_Store
